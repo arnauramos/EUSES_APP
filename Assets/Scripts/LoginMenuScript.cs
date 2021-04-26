@@ -12,6 +12,5 @@ public class LoginMenuScript : MonoBehaviour
     public void onLoginButtonClick()
     {
         SceneManager.LoadScene(1);
-        Debug.Log(password.text.ToString());
     }
 }
