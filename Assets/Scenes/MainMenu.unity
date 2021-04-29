@@ -592,7 +592,6 @@ MonoBehaviour:
   SettingsButton: {fileID: 466093418}
   CreditsButton: {fileID: 1001692366}
   LogoutButton: {fileID: 54557218}
-  WorldsImage: {fileID: 761564486}
   CharacterEditorImage: {fileID: 226565198}
   SettingsImage: {fileID: 1815298879}
   CreditsImage: {fileID: 1118272025}
@@ -1896,8 +1895,8 @@ Camera:
   m_GameObject: {fileID: 1644890443}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.26666668, g: 0.27058825, b: 0.27450982, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0

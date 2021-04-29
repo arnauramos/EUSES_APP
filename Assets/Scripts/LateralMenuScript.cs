@@ -12,7 +12,6 @@ public class LateralMenuScript : MonoBehaviour
     public Button CreditsButton;
     public Button LogoutButton;
 
-    public Image WorldsImage;
     public Image CharacterEditorImage;
     public Image SettingsImage;
     public Image CreditsImage;
@@ -21,34 +20,56 @@ public class LateralMenuScript : MonoBehaviour
 
     private void Start()
     {
-        onWorldsButtonClick();
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            updateButton(WorldsButton);
+        }
+        else
+        {
+            onCharacterEditorButtonClick();
+        }
     }
 
 
     public void onWorldsButtonClick() {
+        SceneManager.LoadScene(2);
         updateButton(WorldsButton);
-        updateImage(WorldsImage);
     }
     public void onCharacterEditorButtonClick() {
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            SceneManager.LoadScene(1);
+        }
         updateButton(CharacterEditorButton);
         updateImage(CharacterEditorImage);
     }
     public void onSettingsButtonClick() {
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            SceneManager.LoadScene(1);
+        }
         updateButton(SettingsButton);
         updateImage(SettingsImage);
     }
     public void onCreditsButtonClick() {
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            SceneManager.LoadScene(1);
+        }
         updateButton(CreditsButton);
         updateImage(CreditsImage);
     }
     public void onLogoutButtonClick() {
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            SceneManager.LoadScene(1);
+        }
         updateButton(LogoutButton);
         SceneManager.LoadScene(0);
     }
 
     private void updateImage(Image img)
     {
-        WorldsImage.enabled = false;
         CharacterEditorImage.enabled = false;
         SettingsImage.enabled = false;
         CreditsImage.enabled = false;
