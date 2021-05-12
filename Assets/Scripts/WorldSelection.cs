@@ -14,6 +14,8 @@ public class WorldSelection : MonoBehaviour
     public float bigScale = 10f;
     public WorldInfoScript wiScript;
 
+    public Swipe swipeControls;
+
     void Start()
     {
         currentSelection = 1;
@@ -22,7 +24,7 @@ public class WorldSelection : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D)) // Tiene que restar
+        if (Input.GetKeyDown(KeyCode.D) || swipeControls.swipeRight) // Tiene que restar
         {
             if(currentSelection == 1)
             {
@@ -34,7 +36,7 @@ public class WorldSelection : MonoBehaviour
             wiScript.ExitCurrentInfo(currentSelection);
         }
 
-        if (Input.GetKeyDown(KeyCode.A)) // Tiene que sumar
+        if (Input.GetKeyDown(KeyCode.A) || swipeControls.swipeLeft) // Tiene que sumar
         {
             if(currentSelection == 7)
             {
@@ -65,5 +67,9 @@ public class WorldSelection : MonoBehaviour
             }
             i++;
         }
+    }
+    public void planetPressed()
+    {
+        Debug.Log("Pressed");
     }
 }
