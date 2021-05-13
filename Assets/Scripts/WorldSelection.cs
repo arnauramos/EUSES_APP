@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WorldSelection : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class WorldSelection : MonoBehaviour
     {
         currentSelection = 1;
         updateScale();
+        updateButtons();
     }
 
     void Update()
@@ -34,6 +36,7 @@ public class WorldSelection : MonoBehaviour
             targetRot = targetRot + new Vector3(0, -51.42f, 0);
             currentSelection--;
             wiScript.ExitCurrentInfo(currentSelection);
+            updateButtons();
         }
 
         if (Input.GetKeyDown(KeyCode.A) || swipeControls.swipeLeft) // Tiene que sumar
@@ -46,6 +49,7 @@ public class WorldSelection : MonoBehaviour
             targetRot = targetRot + new Vector3(0, 51.42f, 0);
             currentSelection++;
             wiScript.ExitCurrentInfo(currentSelection);
+            updateButtons();
         }
 
         currentAngle = new Vector3(0, Mathf.LerpAngle(currentAngle.y, targetRot.y, 2.0f * Time.deltaTime), 0);
@@ -71,5 +75,21 @@ public class WorldSelection : MonoBehaviour
     public void planetPressed()
     {
         Debug.Log("Pressed");
+    }
+    private void updateButtons()
+    {
+        int i = 1;
+        foreach (GameObject planeta in planetas)
+        {
+            if (i == currentSelection)
+            {
+                planeta.transform.Find("PlanetButton").gameObject.SetActive(true);
+            }
+            else
+            {
+                planeta.transform.Find("PlanetButton").gameObject.SetActive(false);
+            }
+            i++;
+        }
     }
 }

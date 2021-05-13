@@ -86,9 +86,6 @@ public class Swipe : MonoBehaviour
                 Reset();
             }
         }
-
-
-
     }
     private void Reset()
     {
