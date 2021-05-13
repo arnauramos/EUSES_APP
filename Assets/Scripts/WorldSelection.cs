@@ -11,21 +11,43 @@ public class WorldSelection : MonoBehaviour
     public int totalWorlds = 7;
     public List<GameObject> planetas;
 
-    public float smallScale = 3.8725f;
-    public float bigScale = 10f;
+    private float smallScale = 3.8725f;
+    private float bigScale = 10f;
+    private float selectedScale = 20f;
     public WorldInfoScript wiScript;
 
     public Swipe swipeControls;
+
+    private bool planetSelected = false;
+    private bool planetExiting = false;
+    public List<Vector3> planetOriginPositions;
 
     void Start()
     {
         currentSelection = 1;
         updateScale();
         updateButtons();
+        updatePlanetOriginPositions();
     }
 
     void Update()
     {
+        if (planetSelected)
+        {
+            if (planetExiting)
+            {
+                ExitPlanet();
+            }
+            else
+            {
+                EnterPlanet();
+                if (Input.GetKeyDown(KeyCode.P))
+                {
+                    planetExiting = true;
+                }
+            }
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.D) || swipeControls.swipeRight) // Tiene que restar
         {
             if(currentSelection == 1)
@@ -74,7 +96,11 @@ public class WorldSelection : MonoBehaviour
     }
     public void planetPressed()
     {
-        Debug.Log("Pressed");
+        if (planetSelected)
+            return;
+
+        wiScript.hideText();
+        planetSelected = true;
     }
     private void updateButtons()
     {
@@ -90,6 +116,64 @@ public class WorldSelection : MonoBehaviour
                 planeta.transform.Find("PlanetButton").gameObject.SetActive(false);
             }
             i++;
+        }
+    }
+
+    public void EnterPlanet()
+    {
+        GameObject planeta = planetas[currentSelection - 1];
+
+        float scaleBig = Mathf.LerpAngle(planeta.transform.localScale.y, selectedScale, 1.0f * Time.deltaTime);
+        planeta.transform.localScale = new Vector3(scaleBig, scaleBig, scaleBig);
+
+        Vector3 p_dest = planeta.transform.localPosition;
+
+        foreach (GameObject planet in planetas)
+        {
+            float posX = Mathf.Lerp(planet.transform.localPosition.x, p_dest.x, 1.0f * Time.deltaTime);
+            float posY = Mathf.Lerp(planet.transform.localPosition.y, p_dest.y, 1.0f * Time.deltaTime);
+            float posZ = Mathf.Lerp(planet.transform.localPosition.z, p_dest.z, 1.0f * Time.deltaTime);
+            planet.transform.localPosition = new Vector3(posX, posY, posZ);
+        }
+
+    }
+    public void ExitPlanet()
+    {
+        GameObject planeta = planetas[currentSelection - 1];
+
+        float scaleBig = Mathf.LerpAngle(planeta.transform.localScale.y, 6.6f, 2.0f * Time.deltaTime);
+        planeta.transform.localScale = new Vector3(scaleBig, scaleBig, scaleBig);
+
+        for (int i = 0; i < planetas.Count; i++)
+        {
+            GameObject p = planetas[i];
+            Vector3 p_pos = planetOriginPositions[i];
+            float pX = Mathf.Lerp(p.transform.localPosition.x, p_pos.x, 2.0f * Time.deltaTime);
+            float pY = Mathf.Lerp(p.transform.localPosition.y, p_pos.y, 2.0f * Time.deltaTime);
+            float pZ = Mathf.Lerp(p.transform.localPosition.z, p_pos.z, 2.0f * Time.deltaTime);
+            p.transform.localPosition = new Vector3(pX, pY, pZ);
+        }
+
+        if (planeta.transform.localScale.x < 6.8f)
+        {
+            wiScript.ShowCurrentInfo();
+            planetSelected = false;
+            planetExiting = false;
+        }
+    }
+
+    private void updatePlanetOriginPositions()
+    {
+        for (int i = 0; i < planetas.Count; i++)
+        {
+            if (planetOriginPositions.Count < planetas.Count)
+            {
+                planetOriginPositions.Add(planetas[i].transform.localPosition);
+            }
+            else
+            {
+                planetOriginPositions[i] = planetas[i].transform.localPosition;
+            }
         }
     }
 }

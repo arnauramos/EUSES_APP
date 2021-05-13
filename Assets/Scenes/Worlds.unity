@@ -2096,8 +2096,6 @@ MonoBehaviour:
   - {fileID: 481099111}
   - {fileID: 1920458608}
   - {fileID: 468025169}
-  smallScale: 3.8725
-  bigScale: 10
   wiScript: {fileID: 1774457409}
   swipeControls: {fileID: 1589851974}
 --- !u!1001 &2095327540
@@ -2212,6 +2210,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: planetPressed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4331765762139047241, guid: a8168647cb629e34bbe9da8f45574449,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4331765763843554293, guid: a8168647cb629e34bbe9da8f45574449,
         type: 3}

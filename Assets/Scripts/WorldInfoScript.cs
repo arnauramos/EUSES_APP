@@ -16,8 +16,12 @@ public class WorldInfoScript : MonoBehaviour
         ShowCurrentInfo();
     }
 
+    public void hideText(){
+        WorldName.CrossFadeAlpha(0f, 1f, false);
+    }
+
     public void ExitCurrentInfo(int _currentSelection) {
-        WorldName.CrossFadeAlpha(0, 1f, false);
+        hideText();
         currentSelection = _currentSelection;
         StartCoroutine(ShowInfoCoroutine(1f));
     }
