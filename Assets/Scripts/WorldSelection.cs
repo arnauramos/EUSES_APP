@@ -109,7 +109,7 @@ public class WorldSelection : MonoBehaviour
         {
             if (i == currentSelection)
             {
-                planeta.transform.Find("PlanetButton").gameObject.SetActive(true);
+                StartCoroutine(PlanetButtonActive(1.75f, planeta));
             }
             else
             {
@@ -117,6 +117,12 @@ public class WorldSelection : MonoBehaviour
             }
             i++;
         }
+    }
+
+    IEnumerator PlanetButtonActive(float time, GameObject planeta)
+    {
+        yield return new WaitForSeconds(time);
+        planeta.transform.Find("PlanetButton").gameObject.SetActive(true);
     }
 
     public void EnterPlanet()
