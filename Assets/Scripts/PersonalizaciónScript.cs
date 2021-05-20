@@ -52,13 +52,14 @@ public class PersonalizaciónScript : MonoBehaviour
         int i = 0;
         foreach (GameObject clr in ColorPickers)
         {
+            Debug.Log(clr);
             if (clr == currentColor)
             {
-                clr.GetComponent<Outline>().enabled = true;
+                clr.transform.Find("Outline").gameObject.SetActive(true);
             }
             else
             {
-                clr.GetComponent<Outline>().enabled = false;
+                clr.transform.Find("Outline").gameObject.SetActive(false);
             }
             i++;
         }
