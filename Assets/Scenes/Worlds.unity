@@ -929,6 +929,49 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 842722486}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &690545833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 690545835}
+  - component: {fileID: 690545834}
+  m_Layer: 0
+  m_Name: MongoDB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &690545834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690545833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b83517b5fa1a0248b7a4c9790f39ffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &690545835
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 690545833}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.616876, y: 13.749993, z: -79.4382}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &708322771
 GameObject:
   m_ObjectHideFlags: 0
@@ -2098,6 +2141,7 @@ MonoBehaviour:
   - {fileID: 468025169}
   wiScript: {fileID: 1774457409}
   swipeControls: {fileID: 1589851974}
+  planetOriginPositions: []
 --- !u!1001 &2095327540
 PrefabInstance:
   m_ObjectHideFlags: 0
