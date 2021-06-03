@@ -9,8 +9,44 @@ public class LoginMenuScript : MonoBehaviour
     public TMP_InputField username;
     public TMP_InputField password;
 
+    private void Start()
+    {
+    }
+
     public void onLoginButtonClick()
     {
-        SceneManager.LoadScene(1);
+        int checkLoginInfo_Res = checkLoginInfo();
+        if (checkLoginInfo_Res == 0)
+        {
+            if (MongoScript.Instance.checkLoginInfoDB(username.text, password.text))
+            {
+                SceneManager.LoadScene(1);
+            }
+            else
+            {
+                Debug.Log("Contraseña o nombre de usuario incorrecto");
+            }
+        }
+        else if (checkLoginInfo_Res == 1)
+        {
+            Debug.Log("Nombre de usuario no válido");
+        }
+        else if (checkLoginInfo_Res == 2)
+        {
+            Debug.Log("Contraseña no válida");
+        }
+    }
+
+    private int checkLoginInfo()
+    {
+        if (username.text.Length < 5)
+        {
+            return 1;
+        }
+        else if (password.text.Length < 5)
+        {
+            return 2;
+        }
+        return 0;
     }
 }
