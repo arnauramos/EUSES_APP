@@ -19,13 +19,13 @@ public class LateralMenuScript : MonoBehaviour
 
 
     public void onWorldsButtonClick() {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene(3);
     }
     public void onCharacterEditorButtonClick() {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(5);
     }
     public void onSettingsButtonClick() {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(4);
     }
     public void onCreditsButtonClick() {
 

@@ -45,13 +45,7 @@ public class MongoScript : MonoBehaviour
 
     public void insertTestUser()
     {
-        var usersCollection = db.GetCollection<User_Model>("Users");
-        var testUser = new User_Model();
-        testUser.Username = "TestUser";
-        testUser.Password = "TestPassword";
-        usersCollection.InsertOne(testUser);
-
-        Debug.Log("Usuario insertado");
+        insertUser("TestUser", "TestPassword");
     }
 
     public bool checkLoginInfoDB(string _username, string _password)
@@ -76,8 +70,37 @@ public class MongoScript : MonoBehaviour
         return false;
     }
 
-    public void loginUser(User_Model user)
+    private void loginUser(User_Model user)
     {
         AppManager.Instance.currentUser = user;
+    }
+
+    public bool checkRegisterInfoDB(string _username, string _password)
+    {
+        Init();
+
+        List<User_Model> Users = db.GetCollection<User_Model>("Users").Find(new BsonDocument()).ToList();
+
+        foreach (User_Model user in Users)
+        {
+            if (_username == user.Username)
+            {
+                return false;
+            }
+        }
+        insertUser(_username, _password);
+        Shutdown();
+        return true;
+    }
+
+    private void insertUser(string _username, string _password)
+    {
+        var usersCollection = db.GetCollection<User_Model>("Users");
+        var auxUser = new User_Model();
+        auxUser.Username = _username;
+        auxUser.Password = _password;
+        usersCollection.InsertOne(auxUser);
+
+        Debug.Log("Usuario insertado");
     }
 }
