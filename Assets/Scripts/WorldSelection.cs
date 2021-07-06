@@ -88,6 +88,7 @@ public class WorldSelection : MonoBehaviour
 
             if (i == currentSelection)
             {
+                // ACERCAR LA CAMARA AL PLANETA PARA EVITAR EL PIXELADO AL ESCALAR
                 float scaleBig = Mathf.LerpAngle(planeta.transform.localScale.y, bigScale, 2.0f * Time.deltaTime);
                 planeta.transform.localScale = new Vector3(scaleBig, scaleBig, scaleBig);
             }
