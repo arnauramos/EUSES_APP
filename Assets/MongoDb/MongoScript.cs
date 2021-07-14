@@ -127,4 +127,29 @@ public class MongoScript : MonoBehaviour
 
         return true;
     }
+
+    public List<Profile_Model> getUserProfiles()
+    {
+        // INIT THE DB
+        Init();
+        List<Profile_Model> profiles = new List<Profile_Model>();
+
+        var usersCollection = db.GetCollection<User_Model>("Users");
+        var filter = Builders<User_Model>.Filter.Eq("_id", AppManager.Instance.currentUser._id);
+        User_Model auxUser = usersCollection.Find(filter).FirstOrDefault();
+        ObjectId[] id_profiles = auxUser.id_profile;
+
+        var profilesCollection = db.GetCollection<Profile_Model>("Profiles");
+        for (int i = 0; i < id_profiles.Length; i++)
+        {
+            var profileFilter = Builders<Profile_Model>.Filter.Eq("_id", id_profiles[i]);
+            profiles.Add(profilesCollection.Find(profileFilter).FirstOrDefault());
+        }
+
+
+        // SHUTDOWN THE DB
+        Shutdown();
+
+        return profiles;
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
@@ -8,6 +9,27 @@ using TMPro;
 public class ProfilesMenuScript : MonoBehaviour
 {
     public TMP_InputField profilename;
+    public GameObject grid;
+
+    public GameObject ProfileGO;
+    public GameObject CreateProfileGO;
+
+
+    private void Start()
+    {
+        if (!grid) return;
+
+        List<Profile_Model> userProfiles = MongoScript.Instance.getUserProfiles();
+        for (int i = 0; i < userProfiles.Count; i++)
+        {
+            GameObject auxProfile = Instantiate(ProfileGO, grid.transform);
+            auxProfile.GetComponent<ProfileScript>().initProfile(userProfiles[i]);
+        }
+
+        GameObject auxCreateProfile = Instantiate(CreateProfileGO, grid.transform);
+        auxCreateProfile.GetComponent<Button>().onClick.AddListener(goToCreateProfile);
+    }
+
 
     public void goToCreateProfile()
     {
@@ -34,9 +56,5 @@ public class ProfilesMenuScript : MonoBehaviour
     public void onCancelCreation()
     {
         SceneManager.LoadScene(6);
-    }
-    public void onSelectProfileClick(string _id)
-    {
-        //MongoScript.Instance.selectProfile(_id);
     }
 }

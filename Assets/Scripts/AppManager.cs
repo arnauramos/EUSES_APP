@@ -20,4 +20,5 @@ public class AppManager : MonoBehaviour
     }
 
     public User_Model currentUser;
+    public Profile_Model currentProfile;
 }
