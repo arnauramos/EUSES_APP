@@ -10,4 +10,6 @@ public class User_Model
 
     public string Username { set; get; }
     public string Password { set; get; }
+
+    public ObjectId[] id_profile { set; get; }
 }

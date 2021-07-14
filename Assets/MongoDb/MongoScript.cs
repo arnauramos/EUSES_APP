@@ -73,6 +73,7 @@ public class MongoScript : MonoBehaviour
     private void loginUser(User_Model user)
     {
         AppManager.Instance.currentUser = user;
+        insertProfile();
     }
 
     public bool checkRegisterInfoDB(string _username, string _password)
@@ -102,5 +103,26 @@ public class MongoScript : MonoBehaviour
         usersCollection.InsertOne(auxUser);
 
         Debug.Log("Usuario insertado");
+    }
+
+    public void insertProfile(string _profilename)
+    {
+        // INIT THE DB
+        Init();
+
+        // CREATE NEW PROFILE WITH _profilename AND INSERT INTO ITS COLLECTION
+        var profilesCollection = db.GetCollection<Profile_Model>("Profiles");
+        var auxProfile = new Profile_Model();
+        auxProfile.ProfileName = _profilename;
+        profilesCollection.InsertOne(auxProfile);
+
+        // UPDATE USER'S PROFILES ARRAY WITH THE NEW PROFILE
+        var usersCollection = db.GetCollection<User_Model>("Users");
+        var update = Builders<User_Model>.Update.AddToSet("id_profile", auxProfile._id);
+        var filter = Builders<User_Model>.Filter.Eq("_id", AppManager.Instance.currentUser._id);
+        usersCollection.UpdateOne(filter, update);
+
+        // SHUTDOWN THE DB
+        Shutdown();
     }
 }
