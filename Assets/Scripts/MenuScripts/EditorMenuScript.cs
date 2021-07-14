@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PersonalizaciónScript : MonoBehaviour
+public class EditorMenuScript : MonoBehaviour
 {
 
     public List<GameObject> Botones;
@@ -63,5 +64,10 @@ public class PersonalizaciónScript : MonoBehaviour
             }
             i++;
         }
+    }
+
+    public void onBackClicked()
+    {
+        SceneManager.LoadScene(3);
     }
 }

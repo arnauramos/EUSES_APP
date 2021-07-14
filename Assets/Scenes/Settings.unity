@@ -792,6 +792,7 @@ GameObject:
   - component: {fileID: 979161010}
   - component: {fileID: 979161009}
   - component: {fileID: 979161008}
+  - component: {fileID: 979161012}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -882,6 +883,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1280, y: 800}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &979161012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 979161007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1b3c5fa5d4ba6c45b71734b58a85af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1311558451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,7 +1202,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720176891}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -36, z: 105}
+  m_LocalPosition: {x: 0, y: 0, z: 105}
   m_LocalScale: {x: 85.14524, y: 102.97466, z: 85.14524}
   m_Children: []
   m_Father: {fileID: 979161011}
@@ -1462,8 +1475,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: onWorldsButtonClick
+      - m_Target: {fileID: 979161012}
+        m_MethodName: onBackClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

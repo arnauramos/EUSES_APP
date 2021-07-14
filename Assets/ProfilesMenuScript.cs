@@ -23,7 +23,7 @@ public class ProfilesMenuScript : MonoBehaviour
         for (int i = 0; i < userProfiles.Count; i++)
         {
             GameObject auxProfile = Instantiate(ProfileGO, grid.transform);
-            auxProfile.GetComponent<ProfileScript>().initProfile(userProfiles[i]);
+            auxProfile.GetComponent<ProfileScript>().initProfile(userProfiles[i], false);
         }
 
         GameObject auxCreateProfile = Instantiate(CreateProfileGO, grid.transform);
