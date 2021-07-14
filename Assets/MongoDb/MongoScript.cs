@@ -73,7 +73,6 @@ public class MongoScript : MonoBehaviour
     private void loginUser(User_Model user)
     {
         AppManager.Instance.currentUser = user;
-        insertProfile();
     }
 
     public bool checkRegisterInfoDB(string _username, string _password)
@@ -100,12 +99,13 @@ public class MongoScript : MonoBehaviour
         var auxUser = new User_Model();
         auxUser.Username = _username;
         auxUser.Password = _password;
+        auxUser.id_profile = new ObjectId[0];
         usersCollection.InsertOne(auxUser);
 
         Debug.Log("Usuario insertado");
     }
 
-    public void insertProfile(string _profilename)
+    public bool insertProfile(string _profilename)
     {
         // INIT THE DB
         Init();
@@ -124,5 +124,7 @@ public class MongoScript : MonoBehaviour
 
         // SHUTDOWN THE DB
         Shutdown();
+
+        return true;
     }
 }

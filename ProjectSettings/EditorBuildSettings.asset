@@ -23,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CharacterEditor.unity
     guid: 221c23f2782e9b240b2c8b487b24644c
+  - enabled: 1
+    path: Assets/Scenes/Profiles.unity
+    guid: 55a27fa618e1b704c8ef46d9086d9d62
+  - enabled: 1
+    path: Assets/Scenes/CreateProfile.unity
+    guid: bf866b016df0083478d9ca260e0c2655
   m_configObjects: {}

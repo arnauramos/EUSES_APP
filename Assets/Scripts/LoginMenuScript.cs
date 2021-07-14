@@ -20,7 +20,7 @@ public class LoginMenuScript : MonoBehaviour
         {
             if (MongoScript.Instance.checkLoginInfoDB(username.text, password.text))
             {
-                SceneManager.LoadScene(3);
+                SceneManager.LoadScene(6);
             }
             else
             {
