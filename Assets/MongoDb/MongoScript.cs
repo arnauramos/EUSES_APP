@@ -152,4 +152,27 @@ public class MongoScript : MonoBehaviour
 
         return profiles;
     }
+
+    public void updateProfile()
+    {
+        // INIT THE DB
+        Init();
+        Profile_Model profileAux = AppManager.Instance.currentProfile;
+
+        var profilesCollection = db.GetCollection<Profile_Model>("Profiles");
+
+        var update = Builders<Profile_Model>.Update
+            .Set("id_hair", profileAux.id_hair)
+            .Set("id_bambas", profileAux.id_bambas)
+            .Set("id_camiseta", profileAux.id_camiseta)
+            .Set("id_face", profileAux.id_face)         
+            .Set("id_pantalon", profileAux.id_pantalon)
+            .Set("id_skin", profileAux.id_skin);
+
+        var filter = Builders<Profile_Model>.Filter.Eq("_id", profileAux._id);
+        profilesCollection.UpdateOne(filter, update);
+
+        // SHUTDOWN THE DB
+        Shutdown();
+    }
 }

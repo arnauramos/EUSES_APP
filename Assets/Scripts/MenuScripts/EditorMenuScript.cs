@@ -68,6 +68,31 @@ public class EditorMenuScript : MonoBehaviour
 
     public void onBackClicked()
     {
+        // GUARDAR
+        MongoScript.Instance.updateProfile();
+
+        // SALIR DEL MENÚ DE EDICIÓN
         SceneManager.LoadScene(3);
+    }
+
+    public void onEditHair(int id)
+    {
+        AppManager.Instance.currentProfile.id_hair = id;
+    }
+    public void onEditCamiseta(int id)
+    {
+        AppManager.Instance.currentProfile.id_camiseta = id;
+    }
+    public void onEditPantalones(int id)
+    {
+        AppManager.Instance.currentProfile.id_pantalon = id;
+    }
+    public void onEditBambas(int id)
+    {
+        AppManager.Instance.currentProfile.id_bambas = id;
+    }
+    public void onEditSkinColor(int id)
+    {
+        AppManager.Instance.currentProfile.id_skin = id;
     }
 }
