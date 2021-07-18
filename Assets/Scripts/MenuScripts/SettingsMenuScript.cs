@@ -9,4 +9,11 @@ public class SettingsMenuScript : MonoBehaviour
     {
         SceneManager.LoadScene(3);
     }
+    public void onLogOutClicked()
+    {
+        AppManager.Instance.currentUser = new User_Model();
+        AppManager.Instance.currentProfile = new Profile_Model();
+
+        SceneManager.LoadScene(1);
+    }
 }
