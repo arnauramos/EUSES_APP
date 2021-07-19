@@ -29,7 +29,7 @@ public class WorldInfoScript : MonoBehaviour
 
         //WorldName.text = WorldNames[currentSelection - 1];
         WorldName.text = Planetas[currentSelection - 1].name;
-        WorldName.color = Planetas[currentSelection - 1].GetComponent<MeshRenderer>().material.color;
+        WorldName.color = Planetas[currentSelection - 1].GetComponentInChildren<MeshRenderer>().material.color;
 
         WorldName.CrossFadeAlpha(1f, 1f, false);
     }
