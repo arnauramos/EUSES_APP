@@ -13,14 +13,17 @@ public class WorldSelection : MonoBehaviour
 
     private float smallScale = 3.8725f;
     private float bigScale = 10f;
-    private float selectedScale = 20f;
+    private float selectedScale = 13f;
     public WorldInfoScript wiScript;
 
     public Swipe swipeControls;
 
     private bool planetSelected = false;
-    private bool planetExiting = false;
+    private bool planetEnterFinished = false;
+    public bool planetExiting = false;
     public List<Vector3> planetOriginPositions;
+
+    public GameObject worldPanel;
 
     void Start()
     {
@@ -40,10 +43,13 @@ public class WorldSelection : MonoBehaviour
             }
             else
             {
-                EnterPlanet();
                 if (Input.GetKeyDown(KeyCode.P))
                 {
                     planetExiting = true;
+                }
+                if (!planetEnterFinished)
+                {
+                    EnterPlanet();
                 }
             }
             return;
@@ -88,7 +94,6 @@ public class WorldSelection : MonoBehaviour
 
             if (i == currentSelection)
             {
-                // ACERCAR LA CAMARA AL PLANETA PARA EVITAR EL PIXELADO AL ESCALAR
                 float scaleBig = Mathf.LerpAngle(planeta.transform.localScale.y, bigScale, 2.0f * Time.deltaTime);
                 planeta.transform.localScale = new Vector3(scaleBig, scaleBig, scaleBig);
             }
@@ -125,7 +130,11 @@ public class WorldSelection : MonoBehaviour
         yield return new WaitForSeconds(time);
         planeta.transform.Find("PlanetButton").gameObject.SetActive(true);
     }
-
+    private void EnterPlanetMenu()
+    {
+        worldPanel.SetActive(true);
+        gameObject.SetActive(false);
+    }
     public void EnterPlanet()
     {
         GameObject planeta = planetas[currentSelection - 1];
@@ -143,9 +152,18 @@ public class WorldSelection : MonoBehaviour
             planet.transform.localPosition = new Vector3(posX, posY, posZ);
         }
 
+
+        if (planeta.transform.localScale.y > 12f)
+        {
+            planetEnterFinished = true;
+            EnterPlanetMenu();
+        }
+
     }
     public void ExitPlanet()
     {
+        planetEnterFinished = false;
+
         GameObject planeta = planetas[currentSelection - 1];
 
         float scaleBig = Mathf.LerpAngle(planeta.transform.localScale.y, 6.6f, 2.0f * Time.deltaTime);
