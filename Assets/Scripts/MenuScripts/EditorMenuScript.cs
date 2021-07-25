@@ -6,10 +6,32 @@ using UnityEngine.UI;
 
 public class EditorMenuScript : MonoBehaviour
 {
+    [System.Serializable]
+    public class serializableClass
+    {
+        public List<Material> Materials;
+    }
 
     public List<GameObject> Botones;
     public List<GameObject> Inventarios;
     public List<GameObject> ColorPickers;
+
+    public List<Material> MSkin;
+    public List<serializableClass> MPeloGirl = new List<serializableClass>();
+    public List<serializableClass> MPeloBoy = new List<serializableClass>();
+    public List<Material> MCamiseta;
+    public List<Material> MPantalon;
+    public List<Material> MBambas;
+    public List<Material> MOjos;
+
+    public GameObject Skin;
+    public GameObject Camiseta;
+    public GameObject Pantalones;
+    public GameObject Ojos;
+    public List<GameObject> LBambas;
+    public List<GameObject> LPeloGirl;
+    public List<GameObject> LPeloBoy;
+
 
     private Color selectedColor = new Color32(117, 255, 232, 255);
 
@@ -17,6 +39,7 @@ public class EditorMenuScript : MonoBehaviour
     {
         updateInventarios(Botones[0]);
         updateColorPiel(ColorPickers[0]);
+        updateMaterials();
     }
 
     public void onButtonClicked(GameObject self)
@@ -78,21 +101,62 @@ public class EditorMenuScript : MonoBehaviour
     public void onEditHair(int id)
     {
         AppManager.Instance.currentProfile.id_hair = id;
+        updateMaterials();
     }
     public void onEditCamiseta(int id)
     {
         AppManager.Instance.currentProfile.id_camiseta = id;
+        updateMaterials();
     }
     public void onEditPantalones(int id)
     {
         AppManager.Instance.currentProfile.id_pantalon = id;
+        updateMaterials();
     }
     public void onEditBambas(int id)
     {
         AppManager.Instance.currentProfile.id_bambas = id;
+        updateMaterials();
     }
     public void onEditSkinColor(int id)
     {
         AppManager.Instance.currentProfile.id_skin = id;
+        updateMaterials();
+    }
+
+    private void updateMaterials()
+    {
+        // UPDATE SKIN
+        Skin.GetComponent<SkinnedMeshRenderer>().material = MSkin[AppManager.Instance.currentProfile.id_skin];
+
+        // UPDATE CAMISETA
+        Camiseta.GetComponent<SkinnedMeshRenderer>().material = MCamiseta[AppManager.Instance.currentProfile.id_camiseta];
+
+        // UPDATE PANTALONES
+        Pantalones.GetComponent<SkinnedMeshRenderer>().material = MPantalon[AppManager.Instance.currentProfile.id_pantalon];
+
+        // UPDATE OJOS
+        //Ojos.GetComponent<SkinnedMeshRenderer>().materials[0] = MSkin[AppManager.Instance.currentProfile.id_eyes];
+
+        // UPDATE BAMBAS
+        foreach (var bamba in LBambas)
+        {
+            bamba.GetComponent<SkinnedMeshRenderer>().material = MBambas[AppManager.Instance.currentProfile.id_bambas];
+        }
+        // UPDATE PELO GIRL
+        int p_g = 0;
+        foreach (var peloG in LPeloGirl)
+        {
+            peloG.GetComponent<SkinnedMeshRenderer>().material = MPeloGirl[0].Materials[0];
+            p_g++;
+        }
+
+        // UPDATE PELO BOY
+        int p_b = 0;
+        foreach (var peloB in LPeloBoy)
+        {
+            peloB.GetComponent<SkinnedMeshRenderer>().material = MPeloBoy[p_b].Materials[AppManager.Instance.currentProfile.id_hair];
+            p_b++;
+        }
     }
 }
