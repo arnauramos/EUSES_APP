@@ -30,6 +30,7 @@ public class EditorMenuScript : MonoBehaviour
     public GameObject Ojos;
     public List<GameObject> LBambas;
     public List<GameObject> LPeloGirl;
+    public GameObject peloGirl5flipped;
     public List<GameObject> LPeloBoy;
 
 
@@ -147,7 +148,11 @@ public class EditorMenuScript : MonoBehaviour
         int p_g = 0;
         foreach (var peloG in LPeloGirl)
         {
-            peloG.GetComponent<SkinnedMeshRenderer>().material = MPeloGirl[0].Materials[0];
+            peloG.GetComponent<SkinnedMeshRenderer>().material = MPeloGirl[p_g].Materials[AppManager.Instance.currentProfile.id_hair];
+            if (p_g == 4)
+            {
+                peloGirl5flipped.GetComponent<SkinnedMeshRenderer>().material = MPeloGirl[p_g].Materials[AppManager.Instance.currentProfile.id_hair];
+            }
             p_g++;
         }
 
