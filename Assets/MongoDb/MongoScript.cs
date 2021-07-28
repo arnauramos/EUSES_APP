@@ -167,7 +167,10 @@ public class MongoScript : MonoBehaviour
             .Set("id_camiseta", profileAux.id_camiseta)
             .Set("id_face", profileAux.id_face)         
             .Set("id_pantalon", profileAux.id_pantalon)
-            .Set("id_skin", profileAux.id_skin);
+            .Set("id_skin", profileAux.id_skin)
+            .Set("Gender", profileAux.Gender)
+            .Set("id_hair_boy_selected", profileAux.id_hair_boy_selected)
+            .Set("id_hair_girl_selected", profileAux.id_hair_girl_selected);
 
         var filter = Builders<Profile_Model>.Filter.Eq("_id", profileAux._id);
         profilesCollection.UpdateOne(filter, update);

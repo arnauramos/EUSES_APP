@@ -42,9 +42,8 @@ public class EditorMenuScript : MonoBehaviour
 
     void Start()
     {
+        updateSkinGenderSelectors();
         updateInventarios(Botones[0]);
-        updateColorPiel(ColorPickers[0]);
-        updateGender(Genders[0]);
         updateMaterials();
     }
 
@@ -270,5 +269,11 @@ public class EditorMenuScript : MonoBehaviour
     {
         AppManager.Instance.currentProfile.id_hair_girl_selected = id;
         updateMaterials();
+    }
+
+    private void updateSkinGenderSelectors()
+    {
+        updateColorPiel(ColorPickers[AppManager.Instance.currentProfile.id_skin]);
+        updateGender(Genders[AppManager.Instance.currentProfile.Gender]);
     }
 }
