@@ -17,6 +17,9 @@ public class EditorMenuScript : MonoBehaviour
     public List<GameObject> ColorPickers;
     public List<GameObject> Genders;
 
+    public GameObject InvPeloGirl;
+    public GameObject InvPeloBoy;
+
     public List<Material> MSkin;
     public List<serializableClass> MPeloGirl = new List<serializableClass>();
     public List<serializableClass> MPeloBoy = new List<serializableClass>();
@@ -222,6 +225,8 @@ public class EditorMenuScript : MonoBehaviour
                 }
                 indexHair++;
             }
+            InvPeloBoy.SetActive(true);
+            InvPeloGirl.SetActive(false);
         }
 
         /** female **/
@@ -251,6 +256,19 @@ public class EditorMenuScript : MonoBehaviour
                 }
                 indexHair++;
             }
+            InvPeloGirl.SetActive(true);
+            InvPeloBoy.SetActive(false);
         }
+    }
+
+    public void onChangeBoyHair(int id)
+    {
+        AppManager.Instance.currentProfile.id_hair_boy_selected = id;
+        updateMaterials();
+    }
+    public void onChangeGirlHair(int id)
+    {
+        AppManager.Instance.currentProfile.id_hair_girl_selected = id;
+        updateMaterials();
     }
 }
