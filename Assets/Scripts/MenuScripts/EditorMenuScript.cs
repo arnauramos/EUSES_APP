@@ -15,6 +15,7 @@ public class EditorMenuScript : MonoBehaviour
     public List<GameObject> Botones;
     public List<GameObject> Inventarios;
     public List<GameObject> ColorPickers;
+    public List<GameObject> Genders;
 
     public List<Material> MSkin;
     public List<serializableClass> MPeloGirl = new List<serializableClass>();
@@ -40,6 +41,7 @@ public class EditorMenuScript : MonoBehaviour
     {
         updateInventarios(Botones[0]);
         updateColorPiel(ColorPickers[0]);
+        updateGender(Genders[0]);
         updateMaterials();
     }
 
@@ -51,6 +53,11 @@ public class EditorMenuScript : MonoBehaviour
     public void onColorClicked(GameObject self)
     {
         updateColorPiel(self);
+    }
+
+    public void onGenderClicked(GameObject self)
+    {
+        updateGender(self);
     }
 
     private void updateInventarios(GameObject currentButton)
@@ -90,6 +97,23 @@ public class EditorMenuScript : MonoBehaviour
         }
     }
 
+    private void updateGender(GameObject currentGender)
+    {
+        int i = 0;
+        foreach (GameObject gnd in Genders)
+        {
+            if (gnd == currentGender)
+            {
+                gnd.transform.Find("Outline").gameObject.SetActive(true);
+            }
+            else
+            {
+                gnd.transform.Find("Outline").gameObject.SetActive(false);
+            }
+            i++;
+        }
+    }
+
     public void onBackClicked()
     {
         // GUARDAR
@@ -124,6 +148,11 @@ public class EditorMenuScript : MonoBehaviour
         AppManager.Instance.currentProfile.id_skin = id;
         updateMaterials();
     }
+    public void onEditGender(int id)
+    {
+        AppManager.Instance.currentProfile.Gender = id;
+        updateMaterials();
+    }
 
     private void updateMaterials()
     {
@@ -144,6 +173,10 @@ public class EditorMenuScript : MonoBehaviour
         {
             bamba.GetComponent<SkinnedMeshRenderer>().material = MBambas[AppManager.Instance.currentProfile.id_bambas];
         }
+
+        // UPDATE GENDER
+        updateGender();
+
         // UPDATE PELO GIRL
         int p_g = 0;
         foreach (var peloG in LPeloGirl)
@@ -162,6 +195,62 @@ public class EditorMenuScript : MonoBehaviour
         {
             peloB.GetComponent<SkinnedMeshRenderer>().material = MPeloBoy[p_b].Materials[AppManager.Instance.currentProfile.id_hair];
             p_b++;
+        }
+    }
+
+    private void updateGender()
+    {
+        int gender = AppManager.Instance.currentProfile.Gender;
+        int indexHair = 0;
+
+        /** male **/
+        if (gender == 0)
+        {
+            foreach (var g_h in LPeloGirl)
+            {
+                g_h.SetActive(false);
+            }
+            foreach (var b_h in LPeloBoy)
+            {
+                if (AppManager.Instance.currentProfile.id_hair_boy_selected == indexHair)
+                {
+                    b_h.SetActive(true);
+                }
+                else
+                {
+                    b_h.SetActive(false);
+                }
+                indexHair++;
+            }
+        }
+
+        /** female **/
+        else if (gender == 1)
+        {
+            foreach (var b_h in LPeloBoy)
+            {
+                b_h.SetActive(false);
+            }
+            foreach (var g_h in LPeloGirl)
+            {
+                if (AppManager.Instance.currentProfile.id_hair_girl_selected == indexHair)
+                {
+                    g_h.SetActive(true);
+                    if (indexHair == 4)
+                    {
+                        peloGirl5flipped.SetActive(true);
+                    }
+                    else
+                    {
+                        peloGirl5flipped.SetActive(false);
+                    }
+                }
+                else
+                {
+                    g_h.SetActive(false);
+                }
+                indexHair++;
+            }
         }
     }
 }

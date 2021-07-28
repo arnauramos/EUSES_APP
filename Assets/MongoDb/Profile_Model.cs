@@ -18,4 +18,7 @@ public class Profile_Model
     public int id_pantalon { set; get; }
     public int id_bambas { set; get; }
     public int id_skin { set; get; }
+
+    public int id_hair_boy_selected { set; get; }
+    public int id_hair_girl_selected { set; get; }
 }
